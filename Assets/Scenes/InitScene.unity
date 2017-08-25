@@ -173,6 +173,69 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &97490609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1896363666265826, guid: f64e4fb479c5a4b1cad3400074edd03f,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 97490610}
+  - component: {fileID: 97490612}
+  - component: {fileID: 97490611}
+  m_Layer: 0
+  m_Name: GvrEventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &97490610
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4070148162643540, guid: f64e4fb479c5a4b1cad3400074edd03f,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 97490609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 580127581}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &97490611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114659043709805252, guid: f64e4fb479c5a4b1cad3400074edd03f,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 97490609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd4baceb58cc40c98e500572bede6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vrModeOnly: 0
+  scrollInput:
+    inertia: 1
+    decelerationRate: 0.05
+--- !u!114 &97490612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114541466242946376, guid: f64e4fb479c5a4b1cad3400074edd03f,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 97490609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 20
 --- !u!1 &203672460
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,62 +365,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &580127578
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1431529117532750, guid: a1495c9ef35c54f03a3358c6de3b4d32,
-    type: 2}
-  m_PrefabInternal: {fileID: 1619879809}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 580127581}
-  - component: {fileID: 580127580}
-  - component: {fileID: 580127579}
-  m_Layer: 0
-  m_Name: GameManagers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &580127579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114911634655619266, guid: a1495c9ef35c54f03a3358c6de3b4d32,
-    type: 2}
-  m_PrefabInternal: {fileID: 1619879809}
-  m_GameObject: {fileID: 580127578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b43ed5003e9604a61938bdd6e9e836eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &580127580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114796812948232558, guid: a1495c9ef35c54f03a3358c6de3b4d32,
-    type: 2}
-  m_PrefabInternal: {fileID: 1619879809}
-  m_GameObject: {fileID: 580127578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7efcff4447c3740d4be64da10d507dbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &580127581
+--- !u!4 &580127581 stripped
 Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 4890354479914990, guid: a1495c9ef35c54f03a3358c6de3b4d32,
     type: 2}
   m_PrefabInternal: {fileID: 1619879809}
-  m_GameObject: {fileID: 580127578}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1619879809
 Prefab:
   m_ObjectHideFlags: 0
@@ -399,5 +411,4 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1495c9ef35c54f03a3358c6de3b4d32, type: 2}
-  m_RootGameObject: {fileID: 580127578}
   m_IsPrefabParent: 0
