@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: WaterMaterial
-  m_Shader: {fileID: 4800000, guid: 174cb9c054f3e43f7af76d919ae91246, type: 3}
+  m_Shader: {fileID: 4800000, guid: e4c25ef35d8a14f64b1388ef5da4e8c6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,7 +39,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 5007c8359a6be452a84a4c71be451671, type: 3}
-        m_Scale: {x: 4, y: 4}
+        m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -73,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0.666}
+    - _Color: {r: 1, g: 1, b: 1, a: 0.391}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
