@@ -6,6 +6,6 @@ public class GoToNextLevel : MonoBehaviour
 {
 	void Start ()
 	{
-		LevelManager.Instance.GoToNextLevel ();
+		LevelManager.Instance.GoToNextLevel (false);
 	}
 }
