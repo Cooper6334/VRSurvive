@@ -37,7 +37,7 @@ public class TouchPadUtil : MonoBehaviour {
 		return touching;
 	}
 
-	public bool getRotationDirection(){
+	public int getRotationDirection(){
 		if(circleCount > 3){
 			return 1;
 		} else if(circleCount < -3){
