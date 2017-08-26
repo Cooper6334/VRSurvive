@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: WaterMaterial
-  m_Shader: {fileID: 4800000, guid: e4c25ef35d8a14f64b1388ef5da4e8c6, type: 3}
+  m_Name: RoastFishMaterial
+  m_Shader: {fileID: 4800000, guid: 81fae500ddfa64331ad7869a6706c997, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,10 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BurnedTex:
+        m_Texture: {fileID: 2800000, guid: f2cc0276969a548958c202c9127230ce, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -38,8 +42,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5007c8359a6be452a84a4c71be451671, type: 3}
-        m_Scale: {x: 20, y: 20}
+        m_Texture: {fileID: 2800000, guid: c2962ea026e8949b9b67f00558f7bb3d, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -53,6 +57,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RawTex:
+        m_Texture: {fileID: 2800000, guid: c2962ea026e8949b9b67f00558f7bb3d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RipeTex:
+        m_Texture: {fileID: 2800000, guid: 75271219befe043078706ddf751c3edc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -61,17 +73,21 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LeftBurnedWeight: 0
+    - _LeftRawWeight: 1
+    - _LeftRipeWeight: 0
     - _Metallic: 0
     - _Mode: 0
-    - _MoveSpeedU: 3
-    - _MoveSpeedV: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RightBurnedWeight: 0
+    - _RightRawWeight: 1
+    - _RightRipeWeight: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0.391}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

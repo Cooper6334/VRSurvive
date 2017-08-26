@@ -5,15 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/InitScene.unity
     guid: 661712c7bc465419e96af5b678ab958a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DrillFire.unity
     guid: 24a689156d7554522997c444525c9972
   - enabled: 1
     path: Assets/Scenes/HuntFish.unity
     guid: 1db886db2828e4ce68a9a1271d392e45
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/RoastFish.unity
     guid: 7d684844bab98414f96ccb07fd82841d
