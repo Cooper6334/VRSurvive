@@ -17,7 +17,9 @@ public class GetItemController : MonoBehaviour {
 		}
 		if ((System.DateTime.Now - showIconTime).TotalSeconds > 2) {
 			Destroy (showingIcon);
-			reticle.SetActive (true);
+			if (reticle != null) {
+				reticle.SetActive (true);
+			}
 		}
 	}
 
@@ -27,7 +29,9 @@ public class GetItemController : MonoBehaviour {
 		showingIcon.transform.localRotation = Quaternion.Euler (Vector3.zero);
 		showingIcon.transform.localPosition = iconPosition;
 		showIconTime = System.DateTime.Now;
-		reticle.SetActive (false);
+		if (reticle != null) {
+			reticle.SetActive (false);
+		}
 	}
 
 }

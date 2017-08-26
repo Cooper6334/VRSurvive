@@ -14,16 +14,19 @@ public class ControlSpearScript : MonoBehaviour
 	private const int rotateForce = 100;
 
 	GameObject spearObject;
+	GetItemController getItemController;
 
 	bool startPress;
 	bool spearPositionReady;
 	float spearSpeed;
 	bool spearThrow;
+	int hitFishCnt;
 	Vector3 initSpearPosition = new Vector3 (1.5f, 0, 0);
 
 	// Use this for initialization
 	void Start ()
 	{
+		getItemController = GetComponent<GetItemController> ();
 		initSpearObject ();
 	}
 	
@@ -94,6 +97,7 @@ public class ControlSpearScript : MonoBehaviour
 	{
 		spearThrow = false;
 		spearObject = Instantiate (spearPerfab);
+		spearPerfab.GetComponent<SpearCollisionScript> ().setControlSpearScript (this);
 		spearObject.transform.parent = head;
 		spearObject.transform.localPosition = initSpearPosition;
 		spearObject.transform.localRotation = Quaternion.Euler (new Vector3 (0, 90, 90));
@@ -107,5 +111,10 @@ public class ControlSpearScript : MonoBehaviour
 			return spearSpeedMax;
 		}
 		return r;
+	}
+
+	public void hitFish(){
+		hitFishCnt++;
+		getItemController.showIcon (0);
 	}
 }
