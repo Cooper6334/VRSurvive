@@ -8,7 +8,8 @@ public class ControlSpearScript : MonoBehaviour
 	public Transform head;
 
 	private const float preparSpeed = 0.08f;
-	private const int spearSpeedMin = 2500;
+	private const int spearSpeedMin = 1500;
+	private const int spearSpeedMax = 3500;
 	private const int gravityForce = -25;
 	private const int rotateForce = 100;
 
@@ -42,6 +43,7 @@ public class ControlSpearScript : MonoBehaviour
 			spearPositionReady = false;
 		} else if (Input.GetMouseButtonUp (0)) {
 			if (startPress && spearPositionReady) {
+				spearSpeed = 0;
 				throwSpear ();
 			}
 			spearPositionReady = false;
@@ -54,7 +56,7 @@ public class ControlSpearScript : MonoBehaviour
 				if (spearPosition.z <= -3) {
 					spearPosition.z = -3;
 					spearPositionReady = true;
-				} 
+				}
 			} else {
 				spearPosition.z += preparSpeed;
 				if (spearPosition.z >= 0) {
@@ -65,18 +67,21 @@ public class ControlSpearScript : MonoBehaviour
 			spearObject.transform.localPosition = spearPosition;
 		}
 		if (startPress && spearPositionReady) {
-			spearSpeed = Input.GetAxis ("Mouse X");
+			spearSpeed = -Input.GetAxis ("Mouse X");
+			if (spearSpeed > 10) {
+				throwSpear ();
+				spearPositionReady = false;
+				startPress = false;
+			}
 		}
 	}
 
 	void throwSpear ()
 	{
-		if (spearSpeed < 0) {
-			return;
-		}
+		int s = getSpearSpeedValue ();
 		spearThrow = true;
 		spearObject.transform.parent = null;
-		spearObject.GetComponent<Rigidbody> ().AddRelativeForce (0, spearSpeedMin + spearSpeed * 20, 0);
+		spearObject.GetComponent<Rigidbody> ().AddRelativeForce (0, s, 0);
 		spearObject.GetComponent<Rigidbody> ().AddTorque (spearObject.transform.forward * rotateForce, ForceMode.Force);
 	}
 
@@ -87,5 +92,14 @@ public class ControlSpearScript : MonoBehaviour
 		spearObject.transform.parent = head;
 		spearObject.transform.localPosition = initSpearPosition;
 		spearObject.transform.localRotation = Quaternion.Euler (new Vector3 (0, 90, 90));
+	}
+
+	int getSpearSpeedValue(){
+		int s = (int)((spearSpeed - 10) * 100);
+		int r = spearSpeedMin + s;
+		if (r > spearSpeedMax) {
+			return spearSpeedMax;
+		}
+		return r;
 	}
 }
