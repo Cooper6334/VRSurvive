@@ -34,7 +34,9 @@ public class TouchPadUtil : MonoBehaviour
 		float moveY = Input.GetAxis ("Mouse Y");
 		checkCircle (moveX, moveY);
 	}
-
+	public void resetRotate(){
+		circleCount = 0;
+	}
 	public bool isTouching ()
 	{
 		return touching;

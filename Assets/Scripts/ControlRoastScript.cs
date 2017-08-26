@@ -2,39 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlRoastScript : MonoBehaviour {
+public class ControlRoastScript : MonoBehaviour
+{
 	public GameObject[] fishStick;
 
-	int fishCnt;
-	int tmp;
 	RoastFishStatus[] fishStatus;
+	TouchPadUtil touchPadUtil;
+	int fishCnt;
+	int currentFish;
+	bool selectFish;
+
 	// Use this for initialization
-	void Start () {
-		Debug.Log ("finish init fish start");
+	void Start ()
+	{
+		touchPadUtil = GetComponent<TouchPadUtil> ();
 		fishCnt = fishStick.Length;
 		fishStatus = new RoastFishStatus[fishCnt];
-		for(int i=0;i<fishCnt;i++){
-			Transform stick = fishStick[i].transform.GetChild (0);
+		for (int i = 0; i < fishCnt; i++) {
+			Transform stick = fishStick [i].transform.GetChild (0);
 			RoastFishDisplayer displayer = stick.GetChild (0).GetComponent<RoastFishDisplayer> ();
-			fishStatus[i] = new RoastFishStatus(displayer,stick);
+			fishStatus [i] = new RoastFishStatus (displayer, stick);
 		}
-		Debug.Log ("finish init fish");
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
-			fishStatus [tmp].change ();
-			tmp = (tmp + 1) % fishCnt;
+	void Update ()
+	{
+		if (currentFish >= 0) {
+			if (Input.GetMouseButtonDown (0)) {
+				selectFish = true;
+			} else if (Input.GetMouseButtonUp (0)) {
+				if (selectFish && fishStatus [currentFish].getFish () > 0) {
+					fishStick [currentFish].SetActive (false);
+				}
+			}
+			if (touchPadUtil.getRotateCount() != 0) {
+				touchPadUtil.resetRotate ();
+				fishStatus [currentFish].change ();
+				selectFish = false;
+			}
+		} else {
+			selectFish = false;
 		}
 		foreach (RoastFishStatus status in fishStatus) {
-				if(!status.rotate()){
+			if (!status.rotate ()) {
 				status.addRoast ();
 			}
 		}
 	}
 
-	class RoastFishStatus{
+	public void SetCurrentFish (int f)
+	{
+		currentFish = f;
+	}
+
+	class RoastFishStatus
+	{
 		Vector3 stickRotation;
 		RoastFishDisplayer fish;
 		Transform stick;
@@ -42,16 +65,33 @@ public class ControlRoastScript : MonoBehaviour {
 		float bPartStatus;
 		bool isBPart;
 		int currentDegree;
+		bool isFinish;
 
-		public RoastFishStatus(RoastFishDisplayer f,Transform t){
+		public RoastFishStatus (RoastFishDisplayer f, Transform t)
+		{
 			fish = f;
 			stick = t;
 		}
-		public void change(){
+
+		public void change ()
+		{
 			isBPart = !isBPart;
 		}
 
-		public bool rotate(){
+		public int getFish ()
+		{
+			if (aPartStatus > 2.5f || bPartStatus > 2.5f) {
+				isFinish = true;
+				return 2;
+			} else if (aPartStatus > 1.5f && bPartStatus > 1.5f) {
+				isFinish = true;
+				return 1;
+			}
+			return 0;
+		}
+
+		public bool rotate ()
+		{
 			int target = isBPart ? 180 : 0;
 			if (currentDegree < target) {
 				currentDegree += 10;
@@ -65,7 +105,8 @@ public class ControlRoastScript : MonoBehaviour {
 			return true;
 		}
 
-		public void addRoast(){
+		public void addRoast ()
+		{
 			float addValue = 0.001f;
 			if (isBPart) {
 				bPartStatus += addValue;
