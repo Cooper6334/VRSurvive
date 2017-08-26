@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TouchPadUtil : MonoBehaviour {
-	
+public class TouchPadUtil : MonoBehaviour
+{
 	bool touching;
 	int circleDirection;
 	int lastDirection;
 	int circleCount;
-	float minx,miny,maxx,maxy;
+	float minx, miny, maxx, maxy;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		minx = float.MaxValue;
 		miny = float.MaxValue;
 		maxx = float.MinValue;
@@ -19,10 +20,11 @@ public class TouchPadUtil : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		if (Input.GetMouseButtonUp (0)) {
 			touching = false;
-		} else if(Input.GetMouseButtonDown(0)){
+		} else if (Input.GetMouseButtonDown (0)) {
 			touching = true;
 		}
 		if (!touching) {
@@ -33,24 +35,35 @@ public class TouchPadUtil : MonoBehaviour {
 		checkCircle (moveX, moveY);
 	}
 
-	public bool isTouching(){
+	public bool isTouching ()
+	{
 		return touching;
 	}
 
-	public int getRotationDirection(){
-		if(circleCount > 3){
+	public int getRotationDirection ()
+	{
+		if (circleCount > 3) {
 			return 1;
-		} else if(circleCount < -3){
+		} else if (circleCount < -3) {
 			return -1;
 		} else {
 			return 0;
 		}
 	}
 
-//	    1->
-//  4^	0     2v
-//  	3<-
-	private void checkCircle(float x,float y){
+	public int getRotateCount ()
+	{
+		if (circleCount <= 3 && circleCount >= -3) {
+			return 0;
+		}
+		return Mathf.Abs (circleCount);
+	}
+
+	//	    1->
+	//  4^	0     2v
+	//  	3<-
+	private void checkCircle (float x, float y)
+	{
 		if (x == 0 && y == 0) {
 			lastDirection = 0;
 			circleDirection = 0;
