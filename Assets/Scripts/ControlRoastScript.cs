@@ -6,15 +6,19 @@ public class ControlRoastScript : MonoBehaviour
 {
 	public GameObject[] fishStick;
 
+	GetItemController getItemController;
 	RoastFishStatus[] fishStatus;
 	TouchPadUtil touchPadUtil;
 	int fishCnt;
 	int currentFish;
 	bool selectFish;
+	int successFishCnt;
+	int burnFishCnt;
 
 	// Use this for initialization
 	void Start ()
 	{
+		getItemController = GetComponent<GetItemController> ();
 		touchPadUtil = GetComponent<TouchPadUtil> ();
 		fishCnt = fishStick.Length;
 		fishStatus = new RoastFishStatus[fishCnt];
@@ -32,11 +36,19 @@ public class ControlRoastScript : MonoBehaviour
 			if (Input.GetMouseButtonDown (0)) {
 				selectFish = true;
 			} else if (Input.GetMouseButtonUp (0)) {
-				if (selectFish && fishStatus [currentFish].getFish () > 0) {
+				int fishResult = fishStatus [currentFish].getFish ();
+				if (selectFish && fishResult > 0) {
+					if (fishResult == 1) {
+						successFishCnt++;
+						getItemController.showIcon (0);
+					} else {
+						burnFishCnt++;
+						getItemController.showIcon (1);
+					}
 					fishStick [currentFish].SetActive (false);
 				}
 			}
-			if (touchPadUtil.getRotateCount() != 0) {
+			if (touchPadUtil.getRotateCount () != 0) {
 				touchPadUtil.resetRotate ();
 				fishStatus [currentFish].change ();
 				selectFish = false;
@@ -63,6 +75,7 @@ public class ControlRoastScript : MonoBehaviour
 		Transform stick;
 		float aPartStatus;
 		float bPartStatus;
+		int targetDegree;
 		bool isBPart;
 		int currentDegree;
 		bool isFinish;
@@ -76,6 +89,10 @@ public class ControlRoastScript : MonoBehaviour
 		public void change ()
 		{
 			isBPart = !isBPart;
+			targetDegree += 180;
+			while (targetDegree > currentDegree + 360) {
+				targetDegree -= 360;
+			}
 		}
 
 		public int getFish ()
@@ -92,11 +109,8 @@ public class ControlRoastScript : MonoBehaviour
 
 		public bool rotate ()
 		{
-			int target = isBPart ? 180 : 0;
-			if (currentDegree < target) {
+			if (currentDegree < targetDegree) {
 				currentDegree += 10;
-			} else if (currentDegree > target) {
-				currentDegree -= 10;
 			} else {
 				return false;
 			}

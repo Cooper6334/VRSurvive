@@ -15,7 +15,7 @@ public class GetItemController : MonoBehaviour {
 		if (showingIcon == null) {
 			return;
 		}
-		if ((System.DateTime.Now - showIconTime).TotalSeconds > 2) {
+		if ((System.DateTime.Now - showIconTime).TotalSeconds > 1) {
 			Destroy (showingIcon);
 			if (reticle != null) {
 				reticle.SetActive (true);
@@ -24,6 +24,9 @@ public class GetItemController : MonoBehaviour {
 	}
 
 	public void showIcon(int id){
+		if (showingIcon != null) {
+			Destroy (showingIcon);
+		}
 		showingIcon = Instantiate (iconPrefab [id]);
 		showingIcon.transform.parent = camera.transform;
 		showingIcon.transform.localRotation = Quaternion.Euler (Vector3.zero);
