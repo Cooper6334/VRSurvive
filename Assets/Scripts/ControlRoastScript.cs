@@ -32,6 +32,10 @@ public class ControlRoastScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (burnFishCnt + successFishCnt >= 3) {
+			// ending
+			return;
+		}
 		if (currentFish >= 0) {
 			if (Input.GetMouseButtonDown (0)) {
 				selectFish = true;

@@ -17,7 +17,7 @@ public class ControlDrillScript : MonoBehaviour
 	ParticleSystem.MainModule fireModule;
 	TouchPadUtil touchpadPadUtil;
 	int lastRotateCnt;
-	Vector3 drillRotateVector = new Vector3(-90,0,0);
+	Vector3 drillRotateVector = new Vector3 (-90, 0, 0);
 	int targetDrillDegree;
 	int currentDrillDegree;
 	int itemCnt;
@@ -91,7 +91,8 @@ public class ControlDrillScript : MonoBehaviour
 		fireModule.startSize = fireSize;
 	}
 
-	public void getDrillItem(int id){
+	public void getDrillItem (int id)
+	{
 		if (id == 0) {
 			// log
 			itemController.showIcon (1);
@@ -106,7 +107,8 @@ public class ControlDrillScript : MonoBehaviour
 		}
 	}
 
-	public void setDrillItem(){
+	public void setDrillItem ()
+	{
 		Destroy (setDrillItemPosition);
 		logFire.SetActive (true);
 		rericle.SetActive (false);

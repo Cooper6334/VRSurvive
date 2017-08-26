@@ -18,7 +18,7 @@ public class GetItemController : MonoBehaviour {
 		if ((System.DateTime.Now - showIconTime).TotalSeconds > 1) {
 			Destroy (showingIcon);
 			if (reticle != null) {
-				reticle.SetActive (true);
+				reticle.GetComponent<MeshRenderer> ().enabled = true;
 			}
 		}
 	}
@@ -33,7 +33,7 @@ public class GetItemController : MonoBehaviour {
 		showingIcon.transform.localPosition = iconPosition;
 		showIconTime = System.DateTime.Now;
 		if (reticle != null) {
-			reticle.SetActive (false);
+			reticle.GetComponent<MeshRenderer> ().enabled = false;
 		}
 	}
 

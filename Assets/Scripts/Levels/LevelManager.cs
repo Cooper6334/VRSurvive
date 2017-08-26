@@ -63,7 +63,7 @@ public class LevelManager : MonoBehaviour
 		yield return null;
 	}
 
-	void Start ()
+	void Awake ()
 	{
 		currentLevel = 0;
 		isFadeOutScreen = false;
