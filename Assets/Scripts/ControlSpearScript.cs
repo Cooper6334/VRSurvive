@@ -6,6 +6,7 @@ public class ControlSpearScript : MonoBehaviour
 {
 	public GameObject spearPerfab;
 	public Transform head;
+	public TextMesh debugText;
 
 	private const float preparSpeed = 0.08f;
 	private const int spearSpeedMin = 1500;
@@ -50,8 +51,9 @@ public class ControlSpearScript : MonoBehaviour
 			spearPositionReady = false;
 		} else if (Input.GetMouseButtonUp (0)) {
 			if (startPress && spearPositionReady) {
-				spearSpeed = 0;
+				debugText.text = "up " + spearSpeed;
 				throwSpear ();
+				spearSpeed = 0;
 			}
 			spearPositionReady = false;
 			startPress = false;
@@ -75,17 +77,20 @@ public class ControlSpearScript : MonoBehaviour
 			spearObject.transform.localPosition = spearPosition;
 		}
 		if (startPress && spearPositionReady) {
-			spearSpeed = -Input.GetAxis ("Mouse X");
-			if (spearSpeed > 10) {
-				throwSpear ();
-				spearPositionReady = false;
-				startPress = false;
+			float newSpeed = -Input.GetAxis ("Mouse X");
+			if (newSpeed > spearSpeed) {
+				spearSpeed = newSpeed;
 			}
+			debugText.text = "move " + spearSpeed;
+			throwSpear();
 		}
 	}
 
 	void throwSpear ()
 	{
+		if (spearSpeed < 10) {
+			return;
+		}
 		int s = getSpearSpeedValue ();
 		spearThrow = true;
 		spearObject.transform.parent = null;
@@ -113,8 +118,12 @@ public class ControlSpearScript : MonoBehaviour
 		return r;
 	}
 
-	public void hitFish(){
+	public void hitFish ()
+	{
 		hitFishCnt++;
 		getItemController.showIcon (0);
+		if (hitFishCnt >= 3) {
+			LevelManager.Instance.GoToNextLevel ();
+		}
 	}
 }

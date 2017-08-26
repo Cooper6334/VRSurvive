@@ -36,6 +36,9 @@ public class ControlDrillScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (drillProgress > 100) {
+			LevelManager.Instance.GoToNextLevel ();
+		}
 		int cnt = touchpadPadUtil.getRotateCount ();
 		if (cnt > lastRotateCnt) {
 			drillProgress++;
