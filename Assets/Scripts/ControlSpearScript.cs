@@ -30,14 +30,18 @@ public class ControlSpearScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (spearThrow) {
-			if (spearObject != null) {
-				spearObject.GetComponent<Rigidbody> ().AddForce (0, gravityForce, 0);
-			} else if (Input.GetMouseButtonDown (0)) {
+		if (spearObject == null) {
+			if (Input.GetMouseButtonDown (0)) {
 				initSpearObject ();
+			} else {
+				return;
 			}
+		}
+		if (spearThrow) {
+			spearObject.GetComponent<Rigidbody> ().AddForce (0, gravityForce, 0);
 			return;
 		}
+		// spear on hand
 		if (Input.GetMouseButtonDown (0)) {
 			startPress = true;
 			spearPositionReady = false;
@@ -48,6 +52,7 @@ public class ControlSpearScript : MonoBehaviour
 			}
 			spearPositionReady = false;
 			startPress = false;
+			return;
 		}
 		if (!spearPositionReady) {
 			Vector3 spearPosition = spearObject.transform.localPosition;
@@ -94,7 +99,8 @@ public class ControlSpearScript : MonoBehaviour
 		spearObject.transform.localRotation = Quaternion.Euler (new Vector3 (0, 90, 90));
 	}
 
-	int getSpearSpeedValue(){
+	int getSpearSpeedValue ()
+	{
 		int s = (int)((spearSpeed - 10) * 100);
 		int r = spearSpeedMin + s;
 		if (r > spearSpeedMax) {

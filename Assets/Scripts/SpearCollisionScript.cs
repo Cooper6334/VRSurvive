@@ -5,7 +5,14 @@ using UnityEngine;
 public class SpearCollisionScript : MonoBehaviour {
 
 	public void OnCollisionEnter(Collision collision){
-		Debug.Log ("spear collision");
 		Destroy (this.gameObject);
+	}
+	public void OnTriggerEnter(Collider collider){
+		if (collider.tag != "Fish") {
+			return;
+		}
+		Debug.Log ("spear hit fish");
+		Destroy (this.gameObject);
+		Destroy (collider.gameObject);
 	}
 }
