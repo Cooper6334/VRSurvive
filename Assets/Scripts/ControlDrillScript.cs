@@ -7,19 +7,27 @@ public class ControlDrillScript : MonoBehaviour
 	public ParticleSystem fireParticle;
 	public ParticleSystem smokeParticle;
 	public Transform drillTransform;
+	public GameObject[] drillItem;
+	public GameObject setDrillItemPosition;
+	public GameObject logFire;
+	public GameObject rericle;
 
+	GetItemController itemController;
 	ParticleSystem.MainModule smokeModule;
 	ParticleSystem.MainModule fireModule;
 	TouchPadUtil touchpadPadUtil;
 	int lastRotateCnt;
-	Vector3 drillRotateVector = Vector3.zero;
+	Vector3 drillRotateVector = new Vector3(-90,0,0);
 	int targetDrillDegree;
 	int currentDrillDegree;
-
+	int itemCnt;
 	int drillProgress;
+	bool startDrill;
+
 	// Use this for initialization
 	void Start ()
 	{
+		itemController = GetComponent<GetItemController> ();
 		touchpadPadUtil = GetComponent<TouchPadUtil> ();
 		smokeModule = smokeParticle.main;
 		fireModule = fireParticle.main;
@@ -38,7 +46,9 @@ public class ControlDrillScript : MonoBehaviour
 			}
 		}
 		lastRotateCnt = cnt;
-		updateDrillStatus ();
+		if (startDrill) {
+			updateDrillStatus ();
+		}
 	}
 
 	void updateDrillStatus ()
@@ -61,14 +71,14 @@ public class ControlDrillScript : MonoBehaviour
 		} else if (targetDrillDegree > currentDrillDegree) {
 			currentDrillDegree += drillMove;
 		}
-		drillRotateVector.y = currentDrillDegree;
+		drillRotateVector.z = currentDrillDegree;
 		drillTransform.localRotation = Quaternion.Euler (drillRotateVector);
 
 		float smokeSize = drillProgress / 15f;
 		if (smokeSize > 3) {
 			smokeSize = 3;
 		}
-		float fireSize = (drillProgress - 60) / 20f;
+		float fireSize = (drillProgress - 80) / 20f;
 		if (fireSize > 0.3f) {
 			fireSize = 0.3f;
 		} else if (fireSize < 0) {
@@ -76,5 +86,27 @@ public class ControlDrillScript : MonoBehaviour
 		}
 		smokeModule.startSize = smokeSize;
 		fireModule.startSize = fireSize;
+	}
+
+	public void getDrillItem(int id){
+		if (id == 0) {
+			// log
+			itemController.showIcon (1);
+		} else {
+			// grass
+			itemController.showIcon (0);
+		}
+		Destroy (drillItem [id]);
+		itemCnt++;
+		if (itemCnt >= 4) {
+			setDrillItemPosition.SetActive (true);
+		}
+	}
+
+	public void setDrillItem(){
+		Destroy (setDrillItemPosition);
+		logFire.SetActive (true);
+		rericle.SetActive (false);
+		startDrill = true;
 	}
 }
