@@ -95,10 +95,16 @@ public class ControlDrillScript : MonoBehaviour
 	{
 		if (id == 0) {
 			// log
-			itemController.showIcon (1);
-		} else {
+			itemController.showIcon (1, new Vector3(1.69f, 6.29f + 0.3f, -4.05f));
+		} else if (id == 1) {
 			// grass
-			itemController.showIcon (0);
+			itemController.showIcon (0, new Vector3(10.2f, 8.0f, -0.49f));
+		} else if (id == 2) {
+			// grass
+			itemController.showIcon (0, new Vector3(-1.96f, 7.0f, -4.43f));
+		} else if (id == 3) {
+			// grass
+			itemController.showIcon (0, new Vector3(-8.63f, 7.56f, -3.54f));
 		}
 		Destroy (drillItem [id]);
 		itemCnt++;

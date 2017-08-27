@@ -116,7 +116,7 @@ public class ControlSpearScript : MonoBehaviour
 	public void hitFish ()
 	{
 		hitFishCnt++;
-		getItemController.showIcon (0);
+		getItemController.showIcon (0, new Vector3 (0.0f, 9.0f, 17.0f));
 		if (hitFishCnt >= 3) {
 			LevelManager.Instance.GoToNextLevel (true);
 		}

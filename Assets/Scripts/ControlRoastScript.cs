@@ -44,10 +44,10 @@ public class ControlRoastScript : MonoBehaviour
 				if (selectFish && fishResult > 0) {
 					if (fishResult == 1) {
 						successFishCnt++;
-						getItemController.showIcon (0);
+						getItemController.showIcon (0, new Vector3(0.0f, 8.0f, 0.0f));
 					} else {
 						burnFishCnt++;
-						getItemController.showIcon (1);
+						getItemController.showIcon (1, new Vector3(0.0f, 8.0f, 0.0f));
 					}
 					fishStick [currentFish].SetActive (false);
 				}
@@ -64,6 +64,10 @@ public class ControlRoastScript : MonoBehaviour
 			if (!status.rotate ()) {
 				status.addRoast ();
 			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.F)) {
+			getItemController.showIcon (1, new Vector3(0.0f, 8.0f, 0.0f));
 		}
 	}
 

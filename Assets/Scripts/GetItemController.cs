@@ -15,7 +15,8 @@ public class GetItemController : MonoBehaviour {
 		if (showingIcon == null) {
 			return;
 		}
-		if ((System.DateTime.Now - showIconTime).TotalSeconds > 1) {
+		//if ((System.DateTime.Now - showIconTime).TotalSeconds > 1) {
+		if ((System.DateTime.Now - showIconTime).TotalSeconds > 10) {
 			Destroy (showingIcon);
 			if (reticle != null) {
 				reticle.GetComponent<MeshRenderer> ().enabled = true;
@@ -23,14 +24,17 @@ public class GetItemController : MonoBehaviour {
 		}
 	}
 
-	public void showIcon(int id){
+	public void showIcon(int id, Vector3 position){
 		if (showingIcon != null) {
 			Destroy (showingIcon);
 		}
 		showingIcon = Instantiate (iconPrefab [id]);
-		showingIcon.transform.parent = camera.transform;
-		showingIcon.transform.localRotation = Quaternion.Euler (Vector3.zero);
-		showingIcon.transform.localPosition = iconPosition;
+		//showingIcon.transform.parent = camera.transform;
+		//showingIcon.transform.localRotation = Quaternion.Euler (Vector3.zero);
+		//showingIcon.transform.localPosition = iconPosition;
+		showingIcon.transform.position = position;
+		showingIcon.transform.forward = position - camera.transform.position;
+		showingIcon.transform.localScale *= (position - camera.transform.position).magnitude / 0.15f;
 		showIconTime = System.DateTime.Now;
 		if (reticle != null) {
 			reticle.GetComponent<MeshRenderer> ().enabled = false;
