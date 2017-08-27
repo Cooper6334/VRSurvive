@@ -7,12 +7,13 @@ public class ControlRoastScript : MonoBehaviour
 	public GameObject[] fishStick;
 	private const float successValue = 1.5f;
 	private const float burnValue = 2.5f;
+	private const int noFish = -1;
 
 	GetItemController getItemController;
 	RoastFishStatus[] fishStatus;
 	TouchPadUtil touchPadUtil;
 	int fishCnt;
-	int currentFish;
+	int currentFish = noFish;
 	bool selectFish;
 	int successFishCnt;
 	int burnFishCnt;
@@ -32,13 +33,12 @@ public class ControlRoastScript : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
-	{
+	void Update (){
 		if (burnFishCnt + successFishCnt >= 3) {
 			// ending
 			return;
 		}
-		if (currentFish >= 0) {
+		if (currentFish >= 0 && !fishStatus[currentFish].isEnd()) {
 			if (Input.GetMouseButtonDown (0)) {
 				selectFish = true;
 			} else if (Input.GetMouseButtonUp (0)) {
@@ -51,8 +51,11 @@ public class ControlRoastScript : MonoBehaviour
 						burnFishCnt++;
 						getItemController.showIcon (1, new Vector3(0.0f, 8.0f, 0.0f));
 					}
+					fishStatus [currentFish].endRoast ();
 					fishStick [currentFish].SetActive (false);
-					currentFish = -1;
+					currentFish = noFish;
+					selectFish = false;
+					return;
 				}
 			}
 			if (touchPadUtil.getRotateCount () != 0) {
@@ -81,6 +84,7 @@ public class ControlRoastScript : MonoBehaviour
 
 	class RoastFishStatus
 	{
+		bool isFinish;
 		Vector3 stickRotation;
 		RoastFishDisplayer fish;
 		Transform stick;
@@ -89,7 +93,6 @@ public class ControlRoastScript : MonoBehaviour
 		int targetDegree;
 		bool isBPart;
 		int currentDegree;
-		bool isFinish;
 
 		public RoastFishStatus (RoastFishDisplayer f, Transform t)
 		{
@@ -108,14 +111,9 @@ public class ControlRoastScript : MonoBehaviour
 
 		public int getFish ()
 		{
-			if (isFinish) {
-				return 0;
-			}
 			if (aPartStatus > burnValue || bPartStatus > burnValue) {
-				isFinish = true;
 				return 2;
 			} else if (aPartStatus > successValue && bPartStatus > successValue) {
-				isFinish = true;
 				return 1;
 			}
 			return 0;
@@ -123,6 +121,9 @@ public class ControlRoastScript : MonoBehaviour
 
 		public bool rotate ()
 		{
+			if (isFinish) {
+				return false;
+			}
 			if (currentDegree < targetDegree) {
 				currentDegree += 10;
 			} else {
@@ -135,6 +136,9 @@ public class ControlRoastScript : MonoBehaviour
 
 		public void addRoast ()
 		{
+			if (isFinish) {
+				return;
+			}
 			float addValue = 0.001f;
 			if (isBPart) {
 				bPartStatus += addValue;
@@ -153,6 +157,14 @@ public class ControlRoastScript : MonoBehaviour
 			} else if (bPartStatus > successValue) {
 				fish.SetLeftRipe ();
 			}
+		}
+
+		public bool isEnd(){
+			return isFinish;
+		}
+
+		public void endRoast(){
+			isFinish = true;
 		}
 	}
 }
