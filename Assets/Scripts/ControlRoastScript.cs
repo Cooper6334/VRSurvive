@@ -5,6 +5,8 @@ using UnityEngine;
 public class ControlRoastScript : MonoBehaviour
 {
 	public GameObject[] fishStick;
+	private const float successValue = 1.5f;
+	private const float burnValue = 2.5f;
 
 	GetItemController getItemController;
 	RoastFishStatus[] fishStatus;
@@ -109,10 +111,10 @@ public class ControlRoastScript : MonoBehaviour
 			if (isFinish) {
 				return 0;
 			}
-			if (aPartStatus > 2.5f || bPartStatus > 2.5f) {
+			if (aPartStatus > burnValue || bPartStatus > burnValue) {
 				isFinish = true;
 				return 2;
-			} else if (aPartStatus > 1.5f && bPartStatus > 1.5f) {
+			} else if (aPartStatus > successValue && bPartStatus > successValue) {
 				isFinish = true;
 				return 1;
 			}
@@ -141,14 +143,14 @@ public class ControlRoastScript : MonoBehaviour
 				bPartStatus += addValue * 3;
 				aPartStatus += addValue;
 			}
-			if (aPartStatus > 2.5f) {
+			if (aPartStatus > burnValue) {
 				fish.SetRightBurned ();
-			} else if (aPartStatus > 1.5f) {
+			} else if (aPartStatus > successValue) {
 				fish.SetRightRipe ();
 			}
-			if (bPartStatus > 2.5f) {
+			if (bPartStatus > burnValue) {
 				fish.SetLeftBurned ();
-			} else if (bPartStatus > 1.5f) {
+			} else if (bPartStatus > successValue) {
 				fish.SetLeftRipe ();
 			}
 		}
