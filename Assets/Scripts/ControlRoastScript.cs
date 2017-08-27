@@ -50,6 +50,7 @@ public class ControlRoastScript : MonoBehaviour
 						getItemController.showIcon (1, new Vector3(0.0f, 8.0f, 0.0f));
 					}
 					fishStick [currentFish].SetActive (false);
+					currentFish = -1;
 				}
 			}
 			if (touchPadUtil.getRotateCount () != 0) {
