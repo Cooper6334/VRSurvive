@@ -105,6 +105,9 @@ public class ControlRoastScript : MonoBehaviour
 
 		public int getFish ()
 		{
+			if (isFinish) {
+				return 0;
+			}
 			if (aPartStatus > 2.5f || bPartStatus > 2.5f) {
 				isFinish = true;
 				return 2;
