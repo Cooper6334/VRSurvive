@@ -16,7 +16,7 @@ public class GetItemController : MonoBehaviour {
 			return;
 		}
 		//if ((System.DateTime.Now - showIconTime).TotalSeconds > 1) {
-		if ((System.DateTime.Now - showIconTime).TotalSeconds > 10) {
+		if ((System.DateTime.Now - showIconTime).TotalSeconds > 1) {
 			Destroy (showingIcon);
 			if (reticle != null) {
 				reticle.GetComponent<MeshRenderer> ().enabled = true;
